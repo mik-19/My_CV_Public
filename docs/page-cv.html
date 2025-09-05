@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8'/>
+  <meta name='viewport' content='width=device-width,initial-scale=1'/>
+  <title>MPL CV – Curriculum Vitae</title>
+  <link rel='stylesheet' href='app.css'/>
+</head>
+<body>
+  <div id='app'></div>
+  <script>
+/*! js-yaml lite subset for simple mappings/sequences */
+(function(g){
+function e(){return null;}
+function parse(y){var p=0;
+function skipSpace(){while(p<y.length&&(y[p]===' '||y[p]==='	')) p++;}
+function skipComment(){skipSpace(); if(y[p]==='#'){while(p<y.length&&y[p]!==
+) p++;}}
+function readKey(){skipSpace(); var m=""; while(p<y.length){var c=y[p]; if(c===':'||c==='
+') break; m+=c; p++;} return m.trim();}
+function readVal(){skipSpace(); var m=""; while(p<y.length&&y[p]!==
+){m+=y[p++];} return m.trim();}
+function convert(v){if(v==="true") return true; if(v==="false") return false; if(v==="null"||v==='') return null; if(!isNaN(v)) return Number(v); return v;}
+function parseDoc(){var obj={}; var arr=null; while(p<y.length){skipComment(); skipSpace(); if(p>=y.length) break;
+ if(y[p]==='-' && y[p+1]===' '){ p+=2; var line=readVal(); if(arr===null) arr=[]; arr.push(convert(line)); if(y[p]==='
+') p++; continue; }
+ var key=readKey(); skipSpace(); if(y[p]!==':'){ return arr||obj; } p++; var val=readVal(); obj[key]=convert(val); skipComment(); if(y[p]==='
+') p++; }
+ return arr||obj;
+}
+g.jsyamlLite={load:function(txt){var src=txt.replace(/
+?/g,'
+'); p=0; return parseDoc(src);}};
+})(this);
+</script>
+  <script src='app.js'></script>
+  <script>
+    (function(){
+      const u = new URL(window.location.href);
+      if(!u.searchParams.get('page')){ u.searchParams.set('page','cv'); history.replaceState(null,'',u.toString()); }
+    })();
+  </script>
+</body>
+</html>
